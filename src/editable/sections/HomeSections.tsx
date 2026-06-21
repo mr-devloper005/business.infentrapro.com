@@ -21,56 +21,28 @@ function taskLabel(task: TaskKey) {
 
 export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSectionProps) {
   const lead = posts[0]
-  const side = posts.slice(1, 3)
-  const trending = posts.slice(3, 8)
-  const heroTitle = pagesContent.home.hero.title.join(' ') || `${SITE_CONFIG.name}: independent stories, culture, and perspective.`
+  const heroTitle = 'Put your story in front of the people who matter.'
 
   return (
-    <section className="border-b border-black/20 bg-[var(--slot4-surface-bg)]">
-      <div className={`${dc.shell.section} py-8 sm:py-10`}>
+    <section className="relative overflow-hidden bg-[#541a1a] text-[#f1e2d1]">
+      <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 12% 40%, #810b38 0, transparent 28%), linear-gradient(120deg, transparent 0 48%, #dcc3aa 49% 50%, transparent 51%)' }} />
+      <div className={`${dc.shell.section} relative py-8 sm:py-10`}>
         {!lead ? (
-          <div className="grid min-h-[520px] items-end bg-black p-8 text-white sm:p-12 lg:grid-cols-[1fr_.55fr]">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[.24em] text-[var(--slot4-accent)]">{pagesContent.home.hero.badge}</p>
-              <h1 className={`${dc.type.heroTitle} mt-5 max-w-5xl`}>{heroTitle}</h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">{pagesContent.home.hero.description}</p>
-              <Link href={primaryRoute} className={`${dc.button.accent} mt-8`}>Open newsroom <ArrowRight className="h-4 w-4" /></Link>
+          <div className="grid min-h-[530px] items-center px-6 py-16 sm:px-12 lg:grid-cols-[1.1fr_.9fr]">
+            <div className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[.28em] text-[#dcc3aa]">Media distribution</p>
+              <h1 className="editorial-serif mt-5 text-5xl font-black leading-[.94] tracking-[-.06em] sm:text-7xl">{heroTitle}</h1>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-[#f1e2d1]/75">A deliberate home for announcements, releases, and ideas ready to travel farther.</p>
+              <Link href={primaryRoute} className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#f1e2d1] px-6 py-3.5 text-xs font-black uppercase tracking-[.15em] text-[#810b38]">Explore distribution <ArrowRight className="h-4 w-4" /></Link>
             </div>
           </div>
         ) : (
-          <div className="grid gap-px bg-black/20 lg:grid-cols-[.72fr_1.48fr_.7fr]">
-            <div className="grid gap-px bg-black/20">
-              {side.map((post, index) => (
-                <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group relative min-h-[270px] overflow-hidden bg-black text-white">
-                  <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_15%,rgba(0,0,0,.9))]" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-[10px] font-black uppercase tracking-[.18em] text-white/65">{index === 0 ? 'Spotlight' : 'Culture desk'}</p>
-                    <h2 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-.045em]">{post.title}</h2>
-                  </div>
-                </Link>
-              ))}
+          <div className="flex min-h-[500px] items-center px-6 py-16 sm:px-12">
+            <div className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[.28em] text-[#dcc3aa]">Media distribution · {taskLabel(primaryTask)}</p>
+              <h1 className="editorial-serif mt-5 max-w-3xl text-5xl font-black leading-[.94] tracking-[-.06em] sm:text-7xl">{heroTitle}</h1>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-[#f1e2d1]/75">Plan, publish, and circulate meaningful updates with a thoughtful editorial presence.</p>
             </div>
-
-            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group relative min-h-[541px] overflow-hidden bg-[var(--slot4-accent)] text-white">
-              <img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84))]" />
-              <div className="absolute inset-x-0 bottom-0 border-t-8 border-[var(--slot4-accent)] p-6 sm:p-9">
-                <span className="bg-[var(--slot4-accent)] px-3 py-2 text-[10px] font-black uppercase tracking-[.2em]">Lead story</span>
-                <h1 className="mt-5 text-4xl font-black leading-[.94] tracking-[-.06em] sm:text-6xl">{lead.title}</h1>
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-white/82 sm:text-base">{getEditableExcerpt(lead, 180)}</p>
-              </div>
-            </Link>
-
-            <aside className="bg-[var(--slot4-surface-bg)] p-6">
-              <div className="flex items-end justify-between border-b-4 border-black pb-3">
-                <h2 className="text-2xl font-black uppercase tracking-[-.04em]">Trending</h2>
-                <span className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Now</span>
-              </div>
-              <div className="mt-2">
-                {trending.map((post, index) => <CompactIndexCard key={post.id} post={post} href={postHref(primaryTask, post, primaryRoute)} index={index} />)}
-              </div>
-            </aside>
           </div>
         )}
       </div>
@@ -104,17 +76,17 @@ export function EditableMagazineSplit({ primaryTask, primaryRoute, posts }: Home
   const portraits = posts.slice(9, 14).length ? posts.slice(9, 14) : posts.slice(1, 6)
   if (!feature) return null
   return (
-    <section className="bg-[var(--slot4-accent)] text-white">
+    <section className="bg-[#f1e2d1] text-[#541a1a]">
       <div className={`${dc.shell.section} py-14 sm:py-20`}>
-        <div className="flex items-end justify-between border-b border-white/50 pb-5">
+        <div className="flex items-end justify-between border-b border-[#541a1a]/25 pb-5">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[.24em] text-white/70">Essential reading</p>
+            <p className="text-[10px] font-black uppercase tracking-[.24em] text-[#810b38]">Essential reading</p>
             <h2 className="mt-2 text-4xl font-black tracking-[-.055em] sm:text-5xl">Features</h2>
           </div>
-          <span className="editorial-serif hidden text-2xl italic sm:block">Stories worth your time.</span>
+          <span className="editorial-serif hidden text-2xl italic text-[#541a1a]/70 sm:block">Stories worth your time.</span>
         </div>
         <div className="mt-7 grid gap-5 lg:grid-cols-[1.55fr_.72fr_.72fr_.72fr]">
-          <Link href={postHref(primaryTask, feature, primaryRoute)} className="group relative min-h-[520px] overflow-hidden bg-black lg:row-span-2">
+          <Link href={postHref(primaryTask, feature, primaryRoute)} className="group relative min-h-[520px] overflow-hidden rounded-[1.5rem] bg-[#541a1a] lg:row-span-2">
             <img src={getEditablePostImage(feature)} alt={feature.title} className="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.025]" />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_20%,rgba(0,0,0,.88))]" />
             <div className="absolute inset-x-0 bottom-0 p-7">
@@ -123,11 +95,11 @@ export function EditableMagazineSplit({ primaryTask, primaryRoute, posts }: Home
             </div>
           </Link>
           {portraits.slice(0, 5).map((post) => (
-            <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group bg-black text-white">
+            <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group overflow-hidden rounded-[1.5rem] bg-[#dcc3aa] text-[#541a1a] shadow-[0_14px_35px_rgba(84,26,26,.12)]">
               <div className="relative aspect-[4/5] overflow-hidden">
                 <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
-                <h3 className="absolute inset-x-0 bottom-0 p-4 text-lg font-black leading-tight tracking-[-.035em]">{post.title}</h3>
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(84,26,26,.88))]" />
+                <h3 className="absolute inset-x-0 bottom-0 p-4 text-lg font-black leading-tight tracking-[-.035em] text-[#f1e2d1]">{post.title}</h3>
               </div>
             </Link>
           ))}
