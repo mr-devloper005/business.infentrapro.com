@@ -1,44 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
-import { globalContent } from '@/editable/content/global.content'
-import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
 export function EditableFooter() {
   const year = new Date().getFullYear()
-  const { session, logout } = useEditableLocalAuthSession()
-
-  return (
-    <footer className="border-t-8 border-[var(--slot4-accent)] bg-black text-white">
-      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_.7fr_.7fr]">
-          <div>
-            <Link href="/" className="editorial-brand text-5xl font-black text-[var(--slot4-accent)] sm:text-6xl">{SITE_CONFIG.name}</Link>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/62">{globalContent.footer?.description || SITE_CONFIG.description}</p>
-            <form action="/signup" className="mt-8 flex max-w-xl border border-white/35">
-              <input name="email" type="email" placeholder="Email for newsroom updates" className="min-w-0 flex-1 bg-transparent px-4 py-4 text-sm outline-none placeholder:text-white/40" />
-              <button className="bg-[var(--slot4-accent)] px-5 text-xs font-black uppercase tracking-[.14em]">Subscribe</button>
-            </form>
-          </div>
-          <div>
-            <h3 className="border-b border-white/25 pb-3 text-[10px] font-black uppercase tracking-[.22em] text-white/55">Explore</h3>
-            <div className="mt-4 grid gap-3">
-              <Link href="/search" className="group inline-flex items-center justify-between text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Archive<ArrowRight className="h-4 w-4" /></Link>
-            </div>
-          </div>
-          <div>
-            <h3 className="border-b border-white/25 pb-3 text-[10px] font-black uppercase tracking-[.22em] text-white/55">Publication</h3>
-            <div className="mt-4 grid gap-3">
-              <Link href="/about" className="text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">About</Link>
-              <Link href="/contact" className="text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Contact</Link>
-              {session ? <><Link href="/create" className="text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Publish</Link><button onClick={logout} className="text-left text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Logout</button></> : <><Link href="/login" className="text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Log in</Link><Link href="/signup" className="text-sm font-black uppercase tracking-[.08em] hover:text-[var(--slot4-accent)]">Subscribe</Link></>}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-white/20 px-4 py-5 text-center text-[10px] font-black uppercase tracking-[.18em] text-white/45">© {year} {SITE_CONFIG.name}. Independent media and public information.</div>
-    </footer>
-  )
+  return <footer className="bg-[#541a1a] text-[#f1e2d1]">
+    <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1.3fr_.7fr_.8fr] lg:py-18">
+      <div><p className="text-[10px] font-black uppercase tracking-[.3em] text-[#dcc3aa]">Media distribution</p><h2 className="editorial-serif mt-3 max-w-md text-4xl font-black leading-none sm:text-5xl">Give your next story a clear signal.</h2><Link href="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#f1e2d1] px-5 py-3 text-xs font-black uppercase tracking-[.14em] text-[#810b38]">Start a conversation <ArrowUpRight className="h-4 w-4" /></Link></div>
+      <div><p className="text-[10px] font-black uppercase tracking-[.24em] text-[#dcc3aa]">Explore</p><div className="mt-5 grid gap-3 text-sm font-bold">{[{label:'Distribution',href:'/media-distribution'},{label:'All updates',href:'/search'},{label:'About',href:'/about'}].map(x=><Link key={x.href} href={x.href} className="hover:text-[#dcc3aa]">{x.label}</Link>)}</div></div>
+      <div><p className="text-[10px] font-black uppercase tracking-[.24em] text-[#dcc3aa]">Contact</p><p className="mt-5 max-w-xs text-sm leading-7 text-[#f1e2d1]/75">Thoughtful distribution for announcements, reports, and stories that deserve a wider audience.</p><Link href="/contact" className="mt-4 inline-block text-sm font-bold underline underline-offset-4">Get in touch</Link></div>
+    </div>
+    <div className="border-t border-[#f1e2d1]/15 px-5 py-5 text-center text-[10px] font-black uppercase tracking-[.18em] text-[#dcc3aa]/75">© {year} {SITE_CONFIG.name}. All rights reserved.</div>
+  </footer>
 }
