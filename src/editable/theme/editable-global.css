@@ -1,16 +1,17 @@
 /* Fully editable publication theme. Keep data and route logic outside this file. */
 :root {
-  --editorial-red: var(--slot4-accent-fill);
-  --editorial-ink: var(--slot4-page-text);
-  --editorial-paper: var(--slot4-surface-bg);
+  --editorial-red: #810b38;
+  --editorial-ink: #541a1a;
+  --editorial-paper: #f1e2d1;
+  --editable-container: 1320px;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--slot4-page-bg) !important;
-  color: var(--slot4-page-text) !important;
-  background-image: none !important;
+  background: #f1e2d1 !important;
+  color: #541a1a !important;
+  background-image: radial-gradient(circle at 75% 0%, rgba(220,195,170,.55), transparent 28rem) !important;
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
 
@@ -26,8 +27,8 @@ body {
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #ebe7e1; }
-::-webkit-scrollbar-thumb { background: #171717; border: 2px solid #ebe7e1; }
+::-webkit-scrollbar-track { background: #f1e2d1; }
+::-webkit-scrollbar-thumb { background: #541a1a; border: 2px solid #f1e2d1; }
 ::-webkit-scrollbar-thumb:hover { background: var(--editorial-red); }
 
 .editorial-brand,
@@ -80,6 +81,24 @@ body {
 .article-content img { width: 100%; margin: 2em 0; }
 
 input, textarea, select, button { border-radius: 0 !important; }
+
+.media-nav { box-shadow: 0 1px 0 rgba(84,26,26,.08); }
+.media-logo { min-width: 106px; }
+.media-logo .editorial-brand { color: #541a1a; }
+
+.article-content { color: #541a1a; }
+.article-content h2, .article-content h3, .article-content h4 { color: #541a1a; }
+.article-content a { color: #810b38; }
+
+main .bg-\[\#f7f4ef\] { background-color: #f1e2d1 !important; }
+main .text-\[\#111\] { color: #541a1a !important; }
+main .bg-\[\#171717\] { background-color: #541a1a !important; }
+main .text-\[\#c92f2f\], main .hover\:text-\[\#c92f2f\]:hover { color: #810b38 !important; }
+main .bg-\[\#c92f2f\] { background-color: #810b38 !important; }
+
+@media (min-width: 1024px) {
+  .media-nav { min-height: 78px; }
+}
 
 @media (max-width: 640px) {
   .article-content { font-size: 1.05rem; line-height: 1.72; }
